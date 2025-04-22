@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H.A.R.C. - Humanitarian Aid and Resource Calculation</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7f9;
+            color: #333;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .hero p {
+            margin: 1rem 0 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .calculator {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+        
+        .input-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .vehicle-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button.export {
+            background-color: var(--accent);
+        }
+        
+        button.export:hover {
+            background-color: #c0392b;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .results {
+            margin-top: 2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light);
+            font-weight: 600;
+        }
+        
+        .summary {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        
+        .summary p {
+            margin: 0.5rem 0;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom-color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .disaster-type {
+            margin-bottom: 1.5rem;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .team {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">H.A.R.<span>C.</span></div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Calculator</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Documentation</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1>Humanitarian Aid and Resource Calculation</h1>
+            <p>Streamlining disaster relief planning to save time when every second counts</p>
+        </section>
+        
+        <section class="calculator">
+            <div class="tabs">
+                <div class="tab active" data-tab="vehicles">Vehicle Resources</div>
+                <div class="tab" data-tab="supplies">Supplies</div>
+                <div class="tab" data-tab="personnel">Personnel</div>
+                <div class="tab" data-tab="timeline">Timeline</div>
+            </div>
+            
+            <div id="vehicles" class="tab-content active">
+                <h2>Vehicle Resource Calculator</h2>
+                
+                <div class="disaster-type">
+                    <label for="disaster">Disaster Type:</label>
+                    <select id="disaster">
+                        <option value="hurricane">Hurricane</option>
+                        <option value="flood">Flood</option>
+                        <option value="earthquake">Earthquake</option>
+                        <option value="wildfire">Wildfire</option>
+                        <option value="tsunami">Tsunami</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="distance">Estimated Operation Distance (miles):</label>
+                        <input type="number" id="distance" value="100" min="1">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="duration">Operation Duration (days):</label>
+                        <input type="number" id="duration" value="7" min="1">
+                    </div>
+                </div>
+                
+                <h3>Vehicle Selection</h3>
+                <div class="vehicle-inputs">
+                    <div>
+                        <label for="car-count">Cars:</label>
+                        <input type="number" id="car-count" value="2" min="0">
+                    </div>
+                    
+                    <div>
+                        <label for="truck-count">Trucks:</label>
+                        <input type="number" id="truck-count" value="3" min="0">
+                    </div>
+                    
+                    <div>
+                        <label for="humvee-count">Humvees:</label>
+                        <input type="number" id="humvee-count" value="4" min="0">
+                    </div>
+                    
+                    <div>
+                        <label for="cargo-count">Cargo Trucks:</label>
+                        <input type="number" id="cargo-count" value="1" min="0">
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button id="calculate-btn">Calculate Resources</button>
+                    <button class="export" id="export-btn">Export to Excel</button>
+                </div>
+                
+                <div class="results">
+                    <h3>Results</h3>
+                    <table id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Vehicle Type</th>
+                                <th>Quantity</th>
+                                <th>MPG</th>
+                                <th>Fuel Needed (gallons)</th>
+                                <th>Est. Cost ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Results will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="summary">
+                        <h4>Summary</h4>
+                        <p>Total Vehicles: <span id="total-vehicles">10</span></p>
+                        <p>Total Fuel Required: <span id="total-fuel">265.48</span> gallons</p>
+                        <p>Estimated Fuel Cost: $<span id="total-cost">1,194.66</span></p>
+                        <p>Recommended Maintenance Schedule: <span id="maintenance">Every 3 days</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="supplies" class="tab-content">
+                <h2>Supply Requirements Calculator</h2>
+                <p>Coming soon. This section will allow calculation of necessary supplies based on disaster type and affected population.</p>
+            </div>
+            
+            <div id="personnel" class="tab-content">
+                <h2>Personnel Requirements</h2>
+                <p>Coming soon. This section will help determine staffing needs for different disaster response scenarios.</p>
+            </div>
+            
+            <div id="timeline" class="tab-content">
+                <h2>Operation Timeline</h2>
+                <p>Coming soon. This section will assist in planning the disaster response timeline.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2025 Humanitarian Aid and Resource Calculation (H.A.R.C.) Project</p>
+        <div class="team">
+            A project by Mason Adamson, Brookes Adams, Jesse Holt, Ari Louis-Jene, and Anastasia Zellner
+        </div>
+    </footer>
+
+    <script>
+        // Vehicle data based on your SQL table
+        const vehicleData = [
+            { type: 'Car', mpg: 27 },
+            { type: 'Truck', mpg: 21 },
+            { type: 'Humvee', mpg: 12 },
+            { type: 'Cargo truck', mpg: 6 }
+        ];
+        
+        // Fuel price per gallon (can be updated)
+        const fuelPrice = 4.50;
+        
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Calculate button functionality
+        document.getElementById('calculate-btn').addEventListener('click', () => {
+            calculateResources();
+        });
+        
+        // Export button functionality
+        document.getElementById('export-btn').addEventListener('click', () => {
+            alert('Export functionality would connect to backend API to generate Excel file');
+        });
+        
+        // Calculate resources function
+        function calculateResources() {
+            const distance = parseInt(document.getElementById('distance').value) || 0;
+            const duration = parseInt(document.getElementById('duration').value) || 0;
+            const carCount = parseInt(document.getElementById('car-count').value) || 0;
+            const truckCount = parseInt(document.getElementById('truck-count').value) || 0;
+            const humveeCount = parseInt(document.getElementById('humvee-count').value) || 0;
+            const cargoCount = parseInt(document.getElementById('cargo-count').value) || 0;
+            
+            // This calculation would typically be done on the backend with the SQL we discussed
+            // Here we're simulating it with JavaScript
+            const results = [];
+            let totalFuel = 0;
+            
+            // Calculate for each vehicle type (if count > 0)
+            if (carCount > 0) {
+                const vehicle = vehicleData.find(v => v.type === 'Car');
+                const fuelNeeded = (distance * carCount * duration) / vehicle.mpg;
+                const cost = fuelNeeded * fuelPrice;
+                results.push({ 
+                    type: vehicle.type, 
+                    count: carCount, 
+                    mpg: vehicle.mpg,
+                    fuel: fuelNeeded.toFixed(2),
+                    cost: cost.toFixed(2)
+                });
+                totalFuel += fuelNeeded;
+            }
+            
+            if (truckCount > 0) {
+                const vehicle = vehicleData.find(v => v.type === 'Truck');
+                const fuelNeeded = (distance * truckCount * duration) / vehicle.mpg;
+                const cost = fuelNeeded * fuelPrice;
+                results.push({ 
+                    type: vehicle.type, 
+                    count: truckCount, 
+                    mpg: vehicle.mpg,
+                    fuel: fuelNeeded.toFixed(2),
+                    cost: cost.toFixed(2)
+                });
+                totalFuel += fuelNeeded;
+            }
+            
+            if (humveeCount > 0) {
+                const vehicle = vehicleData.find(v => v.type === 'Humvee');
+                const fuelNeeded = (distance * humveeCount * duration) / vehicle.mpg;
+                const cost = fuelNeeded * fuelPrice;
+                results.push({ 
+                    type: vehicle.type, 
+                    count: humveeCount, 
+                    mpg: vehicle.mpg,
+                    fuel: fuelNeeded.toFixed(2),
+                    cost: cost.toFixed(2)
+                });
+                totalFuel += fuelNeeded;
+            }
+            
+            if (cargoCount > 0) {
+                const vehicle = vehicleData.find(v => v.type === 'Cargo truck');
+                const fuelNeeded = (distance * cargoCount * duration) / vehicle.mpg;
+                const cost = fuelNeeded * fuelPrice;
+                results.push({ 
+                    type: vehicle.type, 
+                    count: cargoCount, 
+                    mpg: vehicle.mpg,
+                    fuel: fuelNeeded.toFixed(2),
+                    cost: cost.toFixed(2)
+                });
+                totalFuel += fuelNeeded;
+            }
+            
+            // Update the table
+            const tbody = document.querySelector('#results-table tbody');
+            tbody.innerHTML = '';
+            
+            results.forEach(result => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${result.type}</td>
+                    <td>${result.count}</td>
+                    <td>${result.mpg}</td>
+                    <td>${result.fuel}</td>
+                    <td>$${parseFloat(result.cost).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // Update summary
+            const totalVehicles = carCount + truckCount + humveeCount + cargoCount;
+            const totalCost = totalFuel * fuelPrice;
+            
+            document.getElementById('total-vehicles').textContent = totalVehicles;
+            document.getElementById('total-fuel').textContent = totalFuel.toFixed(2);
+            document.getElementById('total-cost').textContent = totalCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
+            // Set maintenance recommendation based on vehicle types and count
+            let maintenance = "Every 7 days";
+            if (humveeCount > 3 || cargoCount > 2) {
+                maintenance = "Every 3 days";
+            } else if (truckCount > 5) {
+                maintenance = "Every 5 days";
+            }
+            document.getElementById('maintenance').textContent = maintenance;
+        }
+        
+        // Initialize with default values
+        calculateResources();
+    </script>
+</body>
+</html>
