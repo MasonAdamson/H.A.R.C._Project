@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TITLE</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  
+    <header class="main-header">
+        <h1>Title</h1>
+    </header>
+
+    <div class="container">
+        
+        <div class="left">
+            <div class="block left-top">
+                <div>
+                    <h2>Situation Variables</h2>
+                    <form class="data-form">
+                        <label>Situation Type:
+                            <input type="text" name="situationType" />
+                        </label>
+                        <label>People Affected:
+                            <input type="number" name="peopleAffected" />
+                        </label>
+                        <label>Mission Duration:
+                            <input type="text" name="missionDuration" />
+                        </label>
+                        <label>Climate:
+                            <input type="text" name="climate" />
+                        </label>
+                    </form>
+                </div>
+            </div>
+            <div class="block left-bottom">
+                <div>
+                    <h2>Expected Equipment</h2>
+                    <form class="data-form">
+                        <label>Vehicles Used:
+                            <input type="text" name="vehiclesUsed" />
+                        </label>
+                        <label>Number of People:
+                            <input type="number" name="equipmentAmount" />
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="right">
+            <div class="block right-top">
+                <div class="top-right-content">
+                    <div class="calculation-display">Calculation Display</div>
+                    <button class="export-btn" onclick="exportTableToExcel('dataTable', 'export')">
+                        Export to Excel
+                    </button>
+                </div>
+            </div>
+            <div class="block right-bottom">
+                <div class="map-section">
+                    <h3>Interactive - Google Map display for distribution planning</h3>
+                    <div id="map" class="map-placeholder">
+                       
+                        Map loading or placeholder...
+                    </div>
+                </div>
+
+                
+                <table id="dataTable" style="display: none;">
+                    <thead>
+                        <tr><th>Header 1</th><th>Header 2</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Example A</td><td>123</td></tr>
+                        <tr><td>Example B</td><td>456</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<!-- 
+   
+   <script>
+       function exportTableToExcel(tableID, filename = '') {
+            const dataType = 'application/vnd.ms-excel';
+            const tableSelect = document.getElementById(tableID);
+            const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            const downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+
+            filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+            if (navigator.msSaveOrOpenBlob) {
+                const blob = new Blob(['\ufeff', tableHTML], { type: dataType });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+                downloadLink.download = filename;
+                downloadLink.click();
+            }
+        }
+    </script> 
+	-->
+	
+<footer class="main-footer">
+    Travel time for selected info points - F.O.B., main, P.O.I., etc
+</footer>
+</body>
+</html>

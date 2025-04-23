@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.left {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.block {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.left-top    { background-color: #3498db; }
+.left-bottom { background-color: #2980b9; }
+.right-top   { background-color: #e74c3c; }
+.right-bottom{ background-color: #c0392b; }
+
+.data-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+.data-form label {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 1rem;
+}
+
+.data-form input {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 1rem;
+}
+
+
+.top-right-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.calculation-display {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* Export Button Style */
+.export-btn {
+    padding: 8px 16px;
+    background-color: #ffffff;
+    color: #e74c3c;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.export-btn:hover {
+    background-color: #f2f2f2;
+}
+.main-header {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.main-footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+}
