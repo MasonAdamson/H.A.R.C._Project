@@ -1,0 +1,92 @@
+:root {
+    --primary: #00796b;  /* Soft Teal for a calming feel */
+    --secondary: #f57c00; /* Warm Orange for call-to-action */
+    --accent: #d32f2f; /* Compassionate Red for urgency */
+    --light: #e1f5fe; /* Light Blue for contrast */
+    --dark: #004d40; /* Dark Teal for readability */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7f9;
+    color: #333;
+}
+
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.hero {
+    background-color: var(--primary);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+h2, h3 {
+    color: var(--primary);
+}
+
+button {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e65100;
+}
+
+footer {
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+footer .team {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.table, .summary {
+    background-color: var(--light);
+}
+
+table th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+table th {
+    background-color: var(--light);
+}
